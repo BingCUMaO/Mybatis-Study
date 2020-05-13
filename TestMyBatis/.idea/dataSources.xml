@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="test_mybatis@localhost" uuid="70528f39-f1b7-488c-8a7f-b49716b3b7f3">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/test_mybatis?userSSL=false&amp;serverTimezone=UTC</jdbc-url>
+    </data-source>
+  </component>
+</project>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!--MyBatis的  全局配置文件-->
+<configuration>
+
+    <properties resource="mysql.properties"/>
+
+
+    <!--  配置环境  -->
+    <environments default="mysql-mybatis">
+        <!--  配置mysql 环境      -->
+        <environment id="mysql-mybatis">
+            <!-- 所配置事务的类型 -->
+            <transactionManager type="JDBC"></transactionManager>
+            <!--   配置数据源（连接池）         -->
+            <dataSource type="POOLED">
+            <!--   配置连接数据库的四个基本信息-->
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+<!--    指定映射配置文件的位置，映射配置文件指的是每个dao独立的配置文件-->
+    <mappers>
+        <mapper resource="cn/BinGCU/dao/IUserDaoMapper.xml"/>
+        <mapper resource="cn/BinGCU/dao/StudentMapper.xml"/>
+        <mapper resource="cn/BinGCU/dao/TeacherMapper.xml"/>
+    </mappers>
+
+
+</configuration>

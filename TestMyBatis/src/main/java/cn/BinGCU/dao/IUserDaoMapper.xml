@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--mapper: 根标签， namespace: 命名空间。 到时候需要将IUserDao.class传给getMapper(Class<T>aClass);        -->
+<!--
+    //用于Dao接口的实现类。其中String 的值 == namespace.statementid。
+    如果不是通过反射获取类，比如不是调用getMapper()，而是使用sqlSession.selectOne(String, Object);
+    则namespace和id都可以随便写，因为这种情况下只需保证 命名 唯一即可
+    -->
+<mapper namespace="cn.BinGCU.dao.IUserDao">
+<!--    配置findAll()-->
+    <select id="findAll"  resultType="cn.BinGCU.User">
+        select *  from  user_table;
+    </select>
+
+    <insert id="insertUser" parameterType="cn.BinGCU.User">
+        insert into user_table (user_id) values (#{userID});
+    </insert>
+
+    <insert id="insertUserByMap" parameterType="java.util.Map">
+        insert into user_table (user_id) values (#{userID});
+    </insert>
+
+</mapper>

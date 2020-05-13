@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.BinGCU.dao.StudentMapper">
+
+
+
+<!--    1、查询所有字段并映射到dao类中-->
+<!--    子查询-->
+<!--    子查询：sql简单写，但映射关系复杂-->
+<!--    优点：dao对象一般拥有表中的所有字段，所以至少不会造成"某些字段没有映射到属性上"的情况-->
+    <select id="getStudent01" resultMap="StudentTeacher01">
+        select  * from student;
+    </select>
+    <resultMap id="StudentTeacher01" type="cn.BinGCU.Student">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <association property="teacher" column="tid" javaType="cn.BinGCU.Teacher" select="getTeacherById"/>
+    </resultMap>
+
+
+<!--    2、查询部分字段并映射到dao类中-->
+<!--    连表查询-->
+<!--    连表查询：虽然sql复杂了点，但映射简单-->
+<!--    优点：调试简单。因为出错了可以在sql中调试，调试sql至少比调试映射关系简单-->
+    <select id="getStudent02" resultMap="StudentTeacher02">
+        select    s.id student_id,
+                     s.name student_name,
+                     t.tname teacher_name
+        from student s, teacher t;
+    </select>
+    <resultMap id="StudentTeacher02" type="cn.BinGCU.Student" >
+        <result property="id" column="student_id"/>
+        <result property="name" column="student_name"/>
+
+        <!--   注意02这里不需要用column  和select，因为在上面的sql语句中已经查询出来了。
+        剩下的工作就是将查出来的字段，根据字段别名/默认名将其分别映射-->
+        <association property="teacher"  javaType="cn.BinGCU.Teacher" >
+            <result property="tname" column="teacher_name" />
+        </association>
+    </resultMap>
+    
+    <select id="getTeacherById" resultType="cn.BinGCU.Teacher">
+        select * from teacher where id = #{tid};
+    </select>
+</mapper>
